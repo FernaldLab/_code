@@ -1,0 +1,1517 @@
+.makeDotPlot = function (dataList, filename, startFrame = NA, endFrame = NA) {#
+	if (!is.na(startFrame)) {dataList$data <- dataList$data[dataList$data$sta >= startFrame,];}#
+	if (!is.na(endFrame)) {dataList$data <- dataList$data[dataList$data$sta <= endFrame,];}#
+	behaviorVec <- dataList$data$beh;#
+	probMatrix <- .getProbabilityMatrix(behaviorVec);#
+	buildDotFile(probMatrix, behaviorVec, file = filename);#
+}
+.makeDotPlot(allupper, "/Volumes/fishstudies/_Behavior/allupperhalfone_auto.dot", endFrame = 34999)
+.makeDotPlot(allupper, "/Volumes/fishstudies/_Behavior/allupperhalftwo_auto.dot", startFrame = 35000)
+.makeDotPlot(allupper, "/Volumes/fishstudies/_Behavior/allupper_auto.dot")
+.makeDotPlot(allupper, "/Volumes/fishstudies/_Behavior/allupper_twobounds.dot", startFrame = 30000, endFrame = 40000)
+head(allupper$data)
+head(allupper$data[allupper$data$beh == "[",])
+str_extract(allupper$codes, "at [^)]*");
+ls()
+str_extract(scorelog$codes, "at [^)]*");
+scorelog$codes
+str_extract(scorelog$codes[,2], "at [^)]*");
+str_extract(noBracketData$codes[,2], "at [^)]*");
+noBracketData$codes[,2]
+.mergeUppercaseLowercase
+lapply(.mergeUppercaseLowercase(dataList), head)
+lapply(.mergeUppercaseLowercase(noBracketData), head)
+.mergeUppercaseLowercase = function (dataList, charsToKeepSeparate = "i") {#
+	for (i in 1:dim(dataList$data)[1]) {#
+		if (!(dataList$data$behavior[i] %in% charsToKeepSeparate)) {#
+			dataList$data$behavior[i] <- toupper(dataList$data$behavior[i]);#
+		}#
+	}#
+	for (i in 1:dim(dataList$codes)[1]) {#
+		if (!(dataList$codes[i,1] %in% charsToKeepSeparate)) {#
+			dataList$codes[i,1] <- toupper(dataList$codes[i,1]);#
+		}#
+	}#
+	behaviorVec <- str_extract(newcodes[,2], "[^(]*");#
+	subjectVec <- str_extract(newcodes[,2], "at [a-zA-Z]*");#
+	print(behaviorVec);#
+	for (i in dim(dataList$codes)[1]:1) {#
+		if (i < dim(dataList$codes)[1] && dataList$codes[i,1] %in% dataList$codes[(i+1):dim(dataList$codes)[1],1]) {#
+			dataList$codes <- dataList$codes[-i,];#
+		} else {#
+			dataList$codes[i,2] = if (is.na(subjectVec[i])) {behaviorVec[i]}#
+			else {paste(behaviorVec[i], subjectVec[i], sep = "")}#
+		}#
+	}#
+	return(dataList);#
+}
+lapply(.mergeUppercaseLowercase(noBracketData), head)
+newcodes
+rm(newcodes)
+lapply(.mergeUppercaseLowercase(noBracketData), head)
+.mergeUppercaseLowercase = function (dataList, charsToKeepSeparate = "i") {#
+	for (i in 1:dim(dataList$data)[1]) {#
+		if (!(dataList$data$behavior[i] %in% charsToKeepSeparate)) {#
+			dataList$data$behavior[i] <- toupper(dataList$data$behavior[i]);#
+		}#
+	}#
+	for (i in 1:dim(dataList$codes)[1]) {#
+		if (!(dataList$codes[i,1] %in% charsToKeepSeparate)) {#
+			dataList$codes[i,1] <- toupper(dataList$codes[i,1]);#
+		}#
+	}#
+	behaviorVec <- str_extract(dataList$codes[,2], "[^(]*");#
+	subjectVec <- str_extract(dataList$codes[,2], "at [a-zA-Z]*");#
+	for (i in dim(dataList$codes)[1]:1) {#
+		if (i < dim(dataList$codes)[1] && dataList$codes[i,1] %in% dataList$codes[(i+1):dim(dataList$codes)[1],1]) {#
+			dataList$codes <- dataList$codes[-i,];#
+		} else {#
+			dataList$codes[i,2] = if (is.na(subjectVec[i])) {behaviorVec[i]}#
+			else {paste(behaviorVec[i], subjectVec[i], sep = "")}#
+		}#
+	}#
+	return(dataList);#
+}
+lapply(.mergeUppercaseLowercase(noBracketData), head)
+.mergeUppercaseLowercase(noBracketData)$codes
+subjectTable <- cbind(dataList$codes[,1], str_extract(dataList$codes[,2], "at [^)]*");
+subjectTable <- cbind(dataList$codes[,1], str_extract(dataList$codes[,2], "at [^)]*"));
+subjectTable <- cbind(noBracketData$codes[,1], str_extract(noBracketData$codes[,2], "at [^)]*"));
+subjectTable
+subjectTable.names()
+names(subjectTable)
+names(subjectTable)[1] <- subjectTable[,1]
+names(subjectTable)[2] <- subjectTable[,1]
+names(subjectTable)[2] <- "a"
+subjectTable
+subjectTable <- cbind(noBracketData$codes[,1], str_extract(noBracketData$codes[,2], "at [^)]*"));
+subjectTable
+?names
+names(subjectTable)
+names(subjectTable) <- c(c("code", "meaning"), subjectTable[,1])
+subjectTable
+subjectTable[,1]
+subjectTable <- cbind(noBracketData$codes[,1], str_extract(noBracketData$codes[,2], "at [^)]*"));
+subjectTable[,1]
+names(subjectTable[,1])
+names(subjectTable[,1]) <- subjectTable[,1]
+subjectTable
+subjectTable <- cbind(noBracketData$codes[,1], str_extract(noBracketData$codes[,2], "at [^)]*"));
+dimnames(subjectTable)
+dimnames(subjectTable)[2] <- subjectTable[,1]
+dimnames(subjectTable)[,2] <- subjectTable[,1]
+dimnames(subjectTable)[1]
+dimnames(subjectTable)[[2]] <- subjectTable[,1]
+dimnames(subjectTable)[[1]] <- subjectTable[,1]
+subjectTable
+subjectTableVec <- subjectTable[,2]
+names(subjectTableVec) <- subjectTable[,1]
+subjectTableVec["a"]
+subjectTableVec["A"]
+subjectTableVec[c("A", "Q", "p")]
+subjectTableVec[subjectTable[1:5,1]]
+heatmap(cor(t(probma)), symm = TRUE)
+probma
+heatmap(probma)
+heatmap(cor(t(probma)), symm = TRUE)
+table(behaviorSequenceVector)
+filenames=list.files('~/Desktop/SJAN/')
+filenames
+source('/Volumes/fishstudies/_code/ethograms_from_scorevideo.R');dat = .getDataBatch()
+source('/Volumes/fishstudies/_code/ethograms_from_scorevideo.R');
+dat=.getDataBatch(paste('~/Desktop/SJAN/',filenames,sep=''))
+lapply(dat,head)
+names(dat)
+dat$'~/Desktop/SJAN/logPC52714-2-111414-AN.txt'
+countmats=.getTransitionCountMatrixFromList(dat)
+countmats=.getTransitionCountMatrixFromList(dat)
+traceback()
+countmats=.getTransitionCountMatrixFromList(dat,NULL)
+countmats=.getTransitionCountMatrixFromList(dat,F)
+.getTransitionCountMatrixFromVec(dat[[1]][,1])
+head(dat[[1]])
+head(dat[[1]][[1]])
+.getTransitionCountMatrixFromVec(dat[[1]][[1]][,1])
+source('/Volumes/fishstudies/_code/ethograms_from_scorevideo.R');
+countmats=.getTransitionCountMatrixFromList(dat)
+source('/Volumes/fishstudies/_code/ethograms_from_scorevideo.R');
+countmats=.getTransitionCountMatrixFromList(dat)
+traceback()
+countmats=.getTransitionCountMatrixFromList(dat,F)
+countmats=.getTransitionCountMatrixFromList(dat,F)
+collectGarbage()
+gc()
+countmats=.getTransitionCountMatrixFromList(dat,F)
+countmats=.getTransitionCountMatrixFromList(dat,NULL)
+countmats=.getTransitionCountMatrixFromList(dat,T)
+traceback()
+.getTransitionCountMatrixFromVec(dat[[1]][[1]][,1])
+.getTransitionCountMatrixFromList(dat)
+traceback()
+.getTransitionCountMatrixFromList = function (getDataBatchOutputList, removeEndSingletons=T) {#
+	dat = getDataBatchOutputList;#
+	cList = list();#
+	for (f in 1:length(dat)) {#
+		cList[[f]] = .getTransitionCountMatrixFromVec(dat[[f]]$data$behavior, removeEndSingletons=removeEndSingletons);#
+	}#
+	names(cList) = names(dat);#
+	return(cList);#
+}
+.getTransitionCountMatrixFromList(dat)
+countmats=.getTransitionCountMatrixFromList(dat)
+x=.dataSummary(dat)
+x
+.analyzeBehavior(filenames[1])
+for (dataset in 1:length(dat)) {.makeDotPlot(dat[[dataset]], paste("~/Desktop/SJAN/", names(dat)[dataset], ".dot", sep = "")}
+for (dataset in 1:length(dat)) {.makeDotPlot(dat[[dataset]], paste("~/Desktop/SJAN/", names(dat)[dataset], ".dot", sep = ""))}
+for (dataset in 1:length(dat)) {.makeDotPlot(dat[[dataset]], paste(names(dat)[dataset], ".dot", sep = ""))}
+length(dat[[1]][[1]])
+dim(dat[[1]][[1]])
+min(dat[[1]][[1]]$sta)
+max(dat[[1]][[1]]$sta)
+head(dat[[1]][[1]])
+min(as.numeric(dat[[1]][[1]]$sta))
+max(as.numeric(dat[[1]][[1]]$sta))
+for (framenum in c(10000,20000,30000,40000,50000,60000)) {.makeDotPlot(dat[[1]], paste(names(dat)[1], "_", framenum, ".dot", sep = ""))}
+for (framenum in c(10000,20000,30000,40000,50000,60000)) {.makeDotPlot(dat[[1]], paste(names(dat)[1], "_", framenum, ".dot", sep = ""), endFrame = framenum)}
+buildDotFile = function (probMatrix, originalDataVec, file='', title='untitled', fontsize=24) {#
+	# write top line to file#
+	cat('digraph', title, '\n', '	{\n', file=file);#
+	# # get behavior frequencies#
+	freqs = table(originalDataVec);#
+	#print(freqs);print(probMatrix)#
+	# # check that behaviors are in same order in freqs and probMatrix#
+	if (!(sum(rownames(probMatrix)==names(freqs)) == length(freqs))) {stop('NAMES DONT MATCH, GO FIND AUSTIN!!!')}#
+	# # compute proportions of behaviors for relative node size#
+	for (beh in 1:length(freqs))#
+	{#
+#		if (names(freqs)[beh] %in% c("[","]")) {next;}#
+		prop = freqs[beh] / sum(freqs) * 10; #print(file)#
+		cat('		', names(freqs)[beh], ' [width=', prop, ', height=', prop, ', fontsize=', fontsize, '];\n', file=file, append=T, sep='');#
+	}#
+	# loop through probMatrix to get probabilities#
+	probMatrix=probMatrix*10;#
+	for (row in 1:nrow(probMatrix))#
+	{#
+		for (col in 1:ncol(probMatrix))#
+		{#
+			val = probMatrix[row,col];#
+			if (val > 0)#
+			{#
+				leader = rownames(probMatrix)[row];#print(leader);#
+				follower = colnames(probMatrix)[col];#print(follower);#
+#				if (leader %in% c("[","]")) {next;}#
+#				if (follower %in% c("[","]")) {next;}#
+				cat('		', leader, ' -> ', follower, ' [label="", style="setlinewidth(', val, ')", arrowsize=1];','\n' ,sep='', file=file, append=T);	#
+		 	}#
+		}#
+	}#
+	# write last line of file#
+	cat('	}', file=file, append=T);#
+	return(NULL)#
+}
+for (framenum in c(10000,20000,30000,40000,50000,60000)) {.makeDotPlot(dat[[1]], paste(names(dat)[1], "_", framenum, ".dot", sep = ""), endFrame = framenum)}
+traceback()
+for (framenum in c(10000,20000,30000,40000,50000,60000)) {print framenum; .makeDotPlot(dat[[1]], paste(names(dat)[1], "_", framenum, ".dot", sep = ""), endFrame = framenum)}
+for (framenum in c(10000,20000,30000,40000,50000,60000)) {print(framenum); .makeDotPlot(dat[[1]], paste(names(dat)[1], "_", framenum, ".dot", sep = ""), endFrame = framenum)}
+.makeDotPlot(dat[[1]], paste(names(dat)[1], "_10000.dot", sep = ""), endFrame = 10000)
+.makeDotPlot = function (dataList, filename, startFrame = NA, endFrame = NA) {#
+	if (!is.na(startFrame)) {dataList$data <- dataList$data[dataList$data$sta >= startFrame,];}#
+	if (!is.na(endFrame)) {dataList$data <- dataList$data[dataList$data$sta <= endFrame,];}#
+	behaviorVec <- dataList$data$beh;#
+	print(head(behaviorVec));#
+	probMatrix <- .getProbabilityMatrix(behaviorVec);#
+	print(head(probMatrix));#
+	buildDotFile(probMatrix, behaviorVec, file = filename);#
+}
+.makeDotPlot(dat[[1]], paste(names(dat)[1], "_10000.dot", sep = ""), endFrame = 10000)
+.makeDotPlot(dat[[1]], paste(names(dat)[1], "_20000.dot", sep = ""), endFrame = 20000)
+.makeDotPlot(dat[[1]], paste(names(dat)[1], "_30000.dot", sep = ""), endFrame = 30000)
+.makeDotPlot(dat[[1]], paste(names(dat)[1], "_40000.dot", sep = ""), endFrame = 40000)
+.makeDotPlot(dat[[1]], paste(names(dat)[1], "_50000.dot", sep = ""), endFrame = 50000)
+for (framenum in c(20000,30000,40000,50000)) {print(framenum); .makeDotPlot(dat[[1]], paste(names(dat)[1], "_", framenum, ".dot", sep = ""), startFrame = framenum)}
+for (framenum in c(20000,30000,40000,50000)) {print(framenum); .makeDotPlot(dat[[1]], paste(names(dat)[1], "_", framenum, ".dot", sep = ""), startFrame = framenum - 5000, endFrame = framenum + 5000)}
+names(dat)
+for (framenum in c(20000,30000,40000,50000)) {print(framenum); .makeDotPlot(dat[[3]], paste(names(dat)[3], "_", framenum, ".dot", sep = ""), startFrame = framenum - 5000, endFrame = framenum + 5000)}
+ls()
+scorelog$codes
+? strsplit
+? unlist
+unlist(strsplit("hello,world,i'm,Katrina","," ))
+? strsplit
+unlist(strsplit("hello,world,i'm,Katrina", c(",", "'")))
+unlist(strsplit("hello,world,i'm,Katrina", c(",", "l")))
+unlist(strsplit("hello,world,i'm,Katrina", c("l")))
+unlist(strsplit("hello,world,i'm,Katrina", c("l",",")))
+unlist(strsplit(strsplit("hello,world,i'm,Katrina","," ), "l"))
+strsplit("hello,world,i'm,Katrina","," )
+unlist(strsplit(unlist(strsplit("hello,world,i'm,Katrina","," )), "l"))
+strsplit("hello,world,i'm,Katrina","[,l]" )
+testLogFile = "~/Desktop/SJAN/logPC52714-2-111414-AN.txt
+""
+"
+testLogFile = "~/Desktop/SJAN/logPC52714-2-111414-AN.txt"
+testLogFile
+.getDescriptionTableFromRawData = function (data0) {#
+	desc_row = which(grepl('^start.*description$', data0[,1])) + 2;#
+	desc_table = matrix(nrow=1, ncol=2);#
+	while (TRUE) {#
+		if (grepl('^-.*-$', data0[desc_row, ])) {#
+			break;#
+		} else {#
+			tmp = unlist(strsplit(data0[desc_row, ], '[0123]'));#
+			code = gsub(' ','',tmp[1]); #remove spaces - this is why start/stop codes don't work#
+			description = gsub('  ','',tmp[length(tmp)]);#
+			desc_table = rbind(desc_table, c(code, description));#
+			desc_row = desc_row + 1;#
+		}#
+	}#
+	desc_table = desc_table[-1, ];#
+	return(desc_table);#
+}
+.getData(testLogFile)
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], ' ');#
+	full = lapply(full, function(f) f[c(1, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]]#
+		if (entry[2]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+		}#
+	}#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$codes
+.getData(testLogFile)$data[1:50,]
+strsplit("word")
+strsplit("word", "")
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+#		if (nchar(entry)[2]==1) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+#		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], ' ');#
+	full = lapply(full, function(f) f[c(1, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]]#
+		if (entry[2]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+		}#
+	}#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		} else {#
+			df = rbind(df, c(' ', as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], ' ');#
+	full = lapply(full, function(f) f[c(1, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]]#
+		if (entry[2]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+		}#
+	}#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		} else {#
+			df = rbind(df, c('" "', as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], ' ');#
+	full = lapply(full, function(f) f[c(1, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]]#
+		if (entry[2]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+		}#
+	}#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		} else {#
+			df = rbind(df, c('_', as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], ' ');#
+	full = lapply(full, function(f) f[c(1, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]]#
+		if (entry[2]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+		}#
+	}#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		} else {#
+			df = rbind(df, c('_', as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], ' ');#
+	full = lapply(full, function(f) f[c(1, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]]#
+		if (entry[2]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+		}#
+	}#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], ' ');#
+	full = lapply(full, function(f) f[c(1, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]]#
+		if (entry[2]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+		}#
+	}#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}#
+#
+# Source: ethograms_from_scorevideo.R#
+# Helper function for .getData#
+.getDescriptionTableFromRawData = function (data0) {#
+	desc_row = which(grepl('^start.*description$', data0[,1])) + 2;#
+	desc_table = matrix(nrow=1, ncol=2);#
+	while (TRUE) {#
+		if (grepl('^-.*-$', data0[desc_row, ])) {#
+			break;#
+		} else {#
+			tmp = unlist(strsplit(data0[desc_row, ], '[0123]'));#
+			code = unlist(strsplit(gsub(' ','',tmp[1]),''));#
+			if (length(code) > 1) {#
+				code <- code [1];#
+			}#
+			description = gsub('  ','',tmp[length(tmp)]);#
+			desc_table = rbind(desc_table, c(code, description));#
+			desc_row = desc_row + 1;#
+		}#
+	}#
+	desc_table = desc_table[-1, ];#
+	return(desc_table);#
+}
+.getData(testLogFile)$data[1:50,]
+.getData(testLogFile)$codes
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], ' ');#
+	full = lapply(full, function(f) f[c(1, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]]#
+		if (entry[2]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), last_frame, NA, NA))#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+		}#
+	}#
+	df = df[order(df[,2]),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}#
+#
+# Source: ethograms_from_scorevideo.R#
+# Helper function for .getData#
+.getDescriptionTableFromRawData = function (data0) {#
+	desc_row = which(grepl('^start.*description$', data0[,1])) + 2;#
+	desc_table = matrix(nrow=1, ncol=2);#
+	while (TRUE) {#
+		if (grepl('^-.*-$', data0[desc_row, ])) {#
+			break;#
+		} else {#
+			tmp = unlist(strsplit(data0[desc_row, ], '[0123]'));#
+			code = unlist(strsplit(gsub(' ','',tmp[1]),''));#
+			if (length(code) > 1) {#
+				code <- code [1];#
+			}#
+			description = gsub('  ','',tmp[length(tmp)]);#
+			desc_table = rbind(desc_table, c(code, description));#
+			desc_row = desc_row + 1;#
+		}#
+	}#
+	desc_table = desc_table[-1, ];#
+	return(desc_table);#
+}
+.getData(testLogFile)$codes
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], ' ');#
+	full = lapply(full, function(f) f[c(1, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]]#
+		if (entry[2]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), last_frame, NA, NA))#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+		}#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], '    ');#
+	full = lapply(full, function(f) f[c(1, 3, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]]#
+		if (entry[2]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), this_frame, NA, NA))#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+		}#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], ' ');#
+	full = lapply(full, function(f) f[c(1, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]]#
+		if (entry[2]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), last_frame, NA, NA))#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+		}#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], '    ');#
+	full = lapply(full, function(f) f[c(1, 3, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]]#
+		if (entry[3]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), this_frame, NA, NA))#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+		}#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], ' ');#
+	full = lapply(full, function(f) f[c(1, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]]#
+		if (entry[2]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), last_frame, NA, NA))#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+		}#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], '    ');#
+	full = lapply(full, function(f) f[c(1, 3, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]]#
+		if (entry[3]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+			df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), this_frame, NA, NA));#
+		}#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], '    ');#
+	full = lapply(full, function(f) f[c(1, 3, length(f))]);#
+	for (i in 1:length(full)) {#
+		entry = full[[i]];#
+		print(entry)#
+		# if (entry[3]=='stop') {#
+			# this_frame = as.numeric(entry[1]);#
+			# last_frame = as.numeric(full[[(i-1)]][1]);#
+			# rrow = which(as.numeric(df[,2])==last_frame);#
+			# df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+			# df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), this_frame, NA, NA));#
+		# }#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], '    ');#
+	full = lapply(full, function(f) f[c(1, 3, length(f))]);#
+	print(full)#
+	for (i in 1:length(full)) {#
+		entry = full[[i]];#
+		# if (entry[3]=='stop') {#
+			# this_frame = as.numeric(entry[1]);#
+			# last_frame = as.numeric(full[[(i-1)]][1]);#
+			# rrow = which(as.numeric(df[,2])==last_frame);#
+			# df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+			# df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), this_frame, NA, NA));#
+		# }#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], '    ');#
+	full = lapply(full, function(f) c(f[c(1, 3)], gsub(' ', '', f[length(f))]);#
+	print(full)#
+	for (i in 1:length(full)) {#
+		entry = full[[i]];#
+		# if (entry[3]=='stop') {#
+			# this_frame = as.numeric(entry[1]);#
+			# last_frame = as.numeric(full[[(i-1)]][1]);#
+			# rrow = which(as.numeric(df[,2])==last_frame);#
+			# df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+			# df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), this_frame, NA, NA));#
+		# }#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], '    ');#
+	full = lapply(full, function(f) c(f[c(1, 3)], gsub(' ', '', f[length(f)])));#
+	print(full)#
+	for (i in 1:length(full)) {#
+		entry = full[[i]];#
+		# if (entry[3]=='stop') {#
+			# this_frame = as.numeric(entry[1]);#
+			# last_frame = as.numeric(full[[(i-1)]][1]);#
+			# rrow = which(as.numeric(df[,2])==last_frame);#
+			# df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+			# df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), this_frame, NA, NA));#
+		# }#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], '    ');#
+	full = lapply(full, function(f) c(f[c(1, 3)], gsub(' ', '', f[length(f)])));#
+	print(full)#
+	for (i in 1:length(full)) {#
+		entry = full[[i]];#
+		if (entry[3]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+			df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), this_frame, NA, NA));#
+		}#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], '    ');#
+	full = lapply(full, function(f) c(f[c(1, 3)], gsub(' ', '', f[length(f)])));#
+	for (i in 1:length(full)) {#
+		entry = full[[i]];#
+		if (entry[3]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+			df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), this_frame, NA, NA));#
+		}#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], '    ');#
+	full = lapply(full, function(f) c(f[1], gsub('^ *','', gsub(' *$','', f[3])), gsub(' ', '', f[length(f)])));#
+	for (i in 1:length(full)) {#
+		entry = full[[i]];#
+		if (entry[3]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			last_frame = as.numeric(full[[(i-1)]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+			df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), this_frame, NA, NA));#
+		}#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], '    ');#
+	full = lapply(full, function(f) c(f[1], gsub('^ *','', gsub(' *$','', f[3])), gsub(' ', '', f[length(f)])));#
+	for (i in 1:length(full)) {#
+		entry = full[[i]];#
+		if (entry[3]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			startIndex = 0;#
+			for (j in 1:i) {#
+				if (full[[j]][2] == entry[2]) {#
+					startIndex = j;#
+				}#
+			}#
+			last_frame = as.numeric(full[[startIndex]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+			df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), this_frame, NA, NA));#
+		}#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], '    ');#
+	full = lapply(full, function(f) c(f[1], gsub('^ *','', gsub(' *$','', f[3])), gsub(' ', '', f[length(f)])));#
+	print(full)#
+	for (i in 1:length(full)) {#
+		entry = full[[i]];#
+		if (entry[3]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			startIndex = 0;#
+			for (j in 1:i) {#
+				if (full[[j]][2] == entry[2]) {#
+					startIndex = j;#
+				}#
+			}#
+			last_frame = as.numeric(full[[startIndex]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+			df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), this_frame, NA, NA));#
+		}#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+.getData = function (filename) {#
+	data0 = read.table(filename, fill=T, colClasses='character', sep='\t', header=F, quote='', blank.lines.skip=T, strip.white=T);#
+	desc_table = .getDescriptionTableFromRawData(data0);#
+	startcodes = desc_table[,1]#
+	start_raw = which(data0=='RAW LOG') + 4;#
+	start_full = which(data0=='FULL LOG') + 4;#
+	end_raw = which(data0=='FULL LOG') - 2;#
+	end_full = which(data0=='NOTES') - 2;#
+	raw = strsplit(data0[start_raw:end_raw, ], ' ');#
+	raw = lapply(raw, function(f) f[c(1, length(f))]);#
+	df = data.frame(matrix(nrow=1, ncol=4));#
+	for (entry in raw) {#
+		if (nchar(entry)[2]==1 && entry[2] %in% startcodes) {#
+			df = rbind(df, c(as.character(entry[2]), as.numeric(entry[1]), NA, NA));#
+		}#
+	}#
+	df = df[-1, ];#
+	names(df) = c('behavior', 'start_frame', 'end_frame', 'duration');#
+#
+	full = strsplit(data0[start_full:end_full, ], '    ');#
+	full = lapply(full, function(f) c(f[1], gsub('^ *','', gsub(' *$','', f[3])), gsub(' ', '', f[length(f)])));#
+	print(full)#
+	for (i in 1:length(full)) {#
+		entry = full[[i]];#
+		if (entry[3]=='stop') {#
+			this_frame = as.numeric(entry[1]);#
+			startIndex = 0;#
+			for (j in 1:i) {#
+				if (full[[j]][2] == entry[2] && full[[j]][3]=='start') {#
+					startIndex = j;#
+				}#
+			}#
+			last_frame = as.numeric(full[[startIndex]][1]);#
+			rrow = which(as.numeric(df[,2])==last_frame);#
+			df[rrow, 3:4] = c(as.numeric(this_frame), as.numeric(this_frame)-as.numeric(last_frame));#
+			df = rbind(df, c(paste("end_", df[rrow, 1], sep = ""), this_frame, NA, NA));#
+		}#
+	}#
+	df = df[order(as.numeric(df[,2])),]#
+	if (nrow(df)<1) {#
+		warning(paste('No data in ', filename, sep=''));#
+		return(list(data=df, codes=NULL));#
+	}#
+	check1 = which(as.numeric(df$end_frame)<as.numeric(df$start_frame));#
+	check2 = which(as.numeric(df$end_frame)==as.numeric(df$duration));#
+	df[unique(c(check1, check2)), 3:4] = NA;#
+#	desc_table = desc_table[as.character(desc_table[, 1]) %in% as.character(df$behavior), ];#
+	return(list(data=df, codes=desc_table));#
+}
+.getData(testLogFile)$data[1:50,]
+source('~/Desktop/Katrina/behavior_code/behavior.R')
+.getData(testLogFile)$data[1:50,]
+.getData(testLogFile)$codes
+testLogOut <- .getData(testLogFile)
+head(testLogOut$data)
+dimnames(testLogOut$data)
+testLogOut$data[1:30,]
+dimnames(testLogOut$data)[[1]] <- ''
+? dimnames
+dimnames(testLogOut$data)[[1]] <- NULL
+? dimnames
+dim(testLogOut$data)
+dimnames(testLogOut$data)[[1]] <- 1:(dim(testLogOut$data)[1])
+testLogOut$data[1:30,]
+testLogOut$codes
+source('~/Desktop/Katrina/behavior_code/behavior.R')
+testLogOut <- .getData(testLogFile)
+warnings()
+testLogOut$codes
+.getDescriptionTableFromRawData = function (data0) {#
+	desc_row = which(grepl('^start.*description$', data0[,1])) + 2;#
+	desc_table = matrix(nrow=1, ncol=2);#
+	while (TRUE) {#
+		if (grepl('^-.*-$', data0[desc_row, ])) {#
+			break;#
+		} else {#
+			tmp = unlist(strsplit(data0[desc_row, ], '[0123]'));#
+			code = unlist(strsplit(gsub(' ','',tmp[1]),''));#
+			if (length(code) > 1) {#
+				code <- code [1];#
+			}#
+			description = gsub('  ','',tmp[length(tmp)]);#
+			subject = unlist(strsplit(data0[desc_row, ], '[0123]'));#
+			print(subject);#
+			desc_table = rbind(desc_table, c(code, description));#
+			desc_row = desc_row + 1;#
+		}#
+	}#
+	desc_table = desc_table[-1, ];#
+	return(desc_table);#
+}
+testLogOut <- .getData(testLogFile)
+.getDescriptionTableFromRawData = function (data0) {#
+	desc_row = which(grepl('^start.*description$', data0[,1])) + 2;#
+	desc_table = matrix(nrow=1, ncol=2);#
+	while (TRUE) {#
+		if (grepl('^-.*-$', data0[desc_row, ])) {#
+			break;#
+		} else {#
+			tmp = unlist(strsplit(data0[desc_row, ], '[0123]'));#
+			code = unlist(strsplit(gsub(' ','',tmp[1]),''));#
+			if (length(code) > 1) {#
+				code <- code [1];#
+			}#
+			description = gsub('  ','',tmp[length(tmp)]);#
+			subject = unlist(strsplit(data0[desc_row, ], '[^0123]'));#
+			print(subject);#
+			desc_table = rbind(desc_table, c(code, description));#
+			desc_row = desc_row + 1;#
+		}#
+	}#
+	desc_table = desc_table[-1, ];#
+	return(desc_table);#
+}
+testLogOut <- .getData(testLogFile)
+.getDescriptionTableFromRawData = function (data0) {#
+	desc_row = which(grepl('^start.*description$', data0[,1])) + 2;#
+	desc_table = matrix(nrow=1, ncol=2);#
+	while (TRUE) {#
+		if (grepl('^-.*-$', data0[desc_row, ])) {#
+			break;#
+		} else {#
+			tmp = unlist(strsplit(data0[desc_row, ], '[0123]'));#
+			code = unlist(strsplit(gsub(' ','',tmp[1]),''));#
+			if (length(code) > 1) {#
+				code <- code [1];#
+			}#
+			description = gsub('  ','',tmp[length(tmp)]);#
+			subject = unlist(strsplit(data0[desc_row, ], '[^0123]'));#
+			print(subject[15]);#
+			desc_table = rbind(desc_table, c(code, description));#
+			desc_row = desc_row + 1;#
+		}#
+	}#
+	desc_table = desc_table[-1, ];#
+	return(desc_table);#
+}
+testLogOut <- .getData(testLogFile)
+.getDescriptionTableFromRawData = function (data0) {#
+	desc_row = which(grepl('^start.*description$', data0[,1])) + 2;#
+	desc_table = matrix(nrow=1, ncol=3);#
+	while (TRUE) {#
+		if (grepl('^-.*-$', data0[desc_row, ])) {#
+			break;#
+		} else {#
+			tmp = unlist(strsplit(data0[desc_row, ], '[0123]'));#
+			code = unlist(strsplit(gsub(' ','',tmp[1]),''));#
+			if (length(code) > 1) {#
+				code <- code [1];#
+			}#
+			description = gsub('  ','',tmp[length(tmp)]);#
+			subject = unlist(strsplit(data0[desc_row, ], '[^0123]'));#
+			print(subject[15]);#
+			desc_table = rbind(desc_table, c(code, description, subject[15]));#
+			desc_row = desc_row + 1;#
+		}#
+	}#
+	desc_table = desc_table[-1, ];#
+	return(desc_table);#
+}
+testLogOut <- .getData(testLogFile)
+testLogOut$codes
+dimnames(testLogOut$codes)
+dimnames(testLogOut$codes)[[2]] <- c("code", "description", "subj")
+testLogOut$codes
+.getDescriptionTableFromRawData = function (data0) {#
+	desc_row = which(grepl('^start.*description$', data0[,1])) + 2;#
+	desc_table = matrix(nrow=1, ncol=3);#
+	while (TRUE) {#
+		if (grepl('^-.*-$', data0[desc_row, ])) {#
+			break;#
+		} else {#
+			tmp = unlist(strsplit(data0[desc_row, ], '[0123]'));#
+			code = unlist(strsplit(gsub(' ','',tmp[1]),''));#
+			if (length(code) > 1) {#
+				code <- code [1];#
+			}#
+			description = gsub('  ','',tmp[length(tmp)]);#
+			subject = unlist(strsplit(data0[desc_row, ], '[^0123]'));#
+			print(subject[15]);#
+			desc_table = rbind(desc_table, c(code, description, subject[15]));#
+			desc_row = desc_row + 1;#
+		}#
+	}#
+	desc_table = desc_table[-1, ];#
+	dimnames(desc_table)[[2]] <- c("code", "description", "subj")#
+	return(desc_table);#
+}
+source('~/Desktop/Katrina/behavior_code/behavior.R')
+testLogOut <- .getData(testLogFile)
+testLogOut$codes
+testLogOut$data[1:100,]
+ls()
+newscorelog <- .getData(scorelogfile)
+newscorelog$data[1:50,]
+newscorelog$codes
+.mergeUppercaseLowercase(newscorelog)
+testLogOut$codes
+library(WGCNA)
+library(WGCNA)
+library(WGCNA)
+blockwiseModules

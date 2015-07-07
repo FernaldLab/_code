@@ -1,0 +1,12 @@
+* installing *source* package ‘bootstrap’ ...
+** R
+** preparing package for lazy loading
+** help
+Warning: /Users/ath/Documents/_Fernald_lab/_code/bootstrap/man/bootstrap-package.Rd:32: All text must be in a section
+Warning: /Users/ath/Documents/_Fernald_lab/_code/bootstrap/man/bootstrap-package.Rd:33: All text must be in a section
+*** installing help indices
+Error in Rd_info(db[[i]]) : 
+  missing/empty \title field in '/Users/ath/Documents/_Fernald_lab/_code/bootstrap/man/bootstrap.2independent.Rd'
+Rd files must have a non-empty \title.
+See chapter 'Writing R documentation' in manual 'Writing R Extensions'.
+* removing ‘/Users/ath/Documents/_Fernald_lab/_code/bootstrap.Rcheck/bootstrap’

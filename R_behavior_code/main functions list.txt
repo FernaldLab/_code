@@ -1,0 +1,22 @@
+.getDataBatch()
+# Reads in all the data in a folder, and returns a list containing one list for each behavior scoring file.
+# Each file's list contains:
+#    1. $data, a data frame with columns behavior, start frame, (end frame), (duration)
+#    2. $codes, a matrix with column 1 containing the codes, column 2 containing the meanings, and
+#          column 3 containing the subjects.
+# Can also use .getData(filename) to load a single file.
+# Usage:
+# filepath = "~/Directory/Folder/"
+# data <- .getDataBatch(paste(folderPath, list.files(folderPath, pattern = 'txt$'), sep = '')
+
+
+
+.mergeUppercaseLowercase(dataList, charsToKeepSeparate = c('i'))
+
+.getProbabilityMatrix
+
+.computeEntropyProbMatrix
+
+.makeDotPlot(list, outfile, startframe, endframe)
+
+

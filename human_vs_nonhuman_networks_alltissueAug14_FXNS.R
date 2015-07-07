@@ -1,0 +1,17 @@
+exn.plotDendroAndColors
+exn.plotEigengeneNetworks2
+exn.computekME
+exn.getModuleGenes
+exn.computeAndPlotMETraitCors
+exn.plotMEsExprWithTraits
+checkGeneListEnrichmentList
+exn.plotModkMEAndkscore
+exn.startAndUploadBgAndModListsToDAVID2
+exn.getModChartsFromDAVID
+.addkMEColsToDAVIDList
+.addGeneAvgColToDAVID
+exn.filterModDAVIDList
+exn.modDAVIDByTerm
+.countTermsWithPatternInModules
+.printTermGeneEnrichment
+.comparekMEWithNumsForFilteredGenesInModTerm
